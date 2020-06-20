@@ -19,3 +19,6 @@ web-report/
 # lock files
 yarn.lock
 package-lock.json
+
+# firebase config
+src/utils/firebaseConfig.js

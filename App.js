@@ -24,9 +24,6 @@ export default class App extends React.Component {
       ...Ionicons.font,
     });
     this.setState({ isReady: true });
-    if (!firebase.apps.length) {
-      firebase.initializeApp(firebaseConfig)
-    }
     YellowBox.ignoreWarnings(['Setting a timer']);
     const _console = _.clone(console);
     console.warn = message => {

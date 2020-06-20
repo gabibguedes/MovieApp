@@ -2,9 +2,14 @@
 
 This project is an app made with React Native to show a list of movies from [movies.js](https://tender-mclean-00a2bd.netlify.app/mobile/movies.json) and the it's comments.
 
-## Run the app
+## Set up Firebase
 
-### With Docker
+Before running the project it's necessary to set up a firebase connection. 
+
+[Create a firebase project](https://firebase.google.com/), and add it's configuration on `src/utils/firebaseConfig.js`. Use the template file [firebaseConfig_example.js](./src/utils/firebaseConfig_example.js).
+
+
+## Run the app with Docker
 Create a file named `.env` in the project root, with the following line:
 
 ```
@@ -19,7 +24,7 @@ Inside the project folder use the following command to run the app on a docker c
 docker-compose up
 ```
 
-### Without docker:
+## Run the app without docker:
 
 Make sure you have expo installed:
 
@@ -39,7 +44,7 @@ Run the app:
 yarn start
 ```
 
-### Access the App
+## Access the App
 Intall Expo on your smartphone. See the following links:
 - [Play Store](https://play.google.com/store/apps/details?id=host.exp.exponent&hl=en_US)
 - [App Store](https://apps.apple.com/br/app/expo-client/id982107779)
@@ -50,9 +55,9 @@ Make sure your computer and phone are in the same network.
 
 ## Architecture
 
-The app was made in React Native, using Expo. 
+The app was made in React Native, using Expo. It connects to firebase for the comments.
 
 
 ## What to improove
 
-...
+- Add login

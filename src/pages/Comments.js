@@ -3,58 +3,38 @@ import { View, ScrollView, Text, TextInput, TouchableOpacity } from 'react-nativ
 import { Container, Spinner, Button } from 'native-base';
 import { Ionicons } from '@expo/vector-icons'; 
 import { EvilIcons } from '@expo/vector-icons'; 
-import { firebaseConfig } from '../utils/firebase';
-import firebase from 'firebase';
-import unidecode from 'unidecode';
-import { useList } from 'react-firebase-hooks/database';
+import { getComments, sendComment } from '../utils/firebase';
 
-function nameToURL(name) {
-  return unidecode(name).split(' ').join('_').toLowerCase();
-}
-
-function sendComment (url, comment, listOfCommets) {
-  let comementList = [...listOfCommets, {
-    username: 'anonymous',
-    text: comment
-  }]
-  firebase.database().ref(url).set(comementList)
-  return comementList
-}
-
-function getComments(url){
-  let comments = []
-  firebase.database().ref(url).on("value", function (snapshot) {
-    if (snapshot.val() !== null) {
-      comments = snapshot.val()
-    } else {
-      comments = []
-    }
-  }, function (err) {
-    console.log(err);
-  });
-  return comments;
-}
 
 export default function Comments({ navigation }) {
   const [text, setText] =  useState('')
   const [comments, setComments] =  useState([])
   const [isLoading, setLoading] = useState(false);
   const [movie] = useState(navigation.state.params.movie)
-  const [url] = useState(nameToURL(movie.title));
+
+  function send() {
+    if (text !== '') {
+      let commentList = sendComment(text, movie.title);
+      setComments(commentList);
+      setText('');
+    }
+  }
+
+  function update() {
+    let commentList = getComments(movie.title)
+    setComments(commentList)
+  }
 
   return (
     isLoading?(
       <Spinner />
     ) : (
       <Container>
-        <Button onPress={() => {
-          let commentList = getComments(url)
-          setComments(commentList)
-        }}>
-          <Text>Aqui</Text>
+        <Button onPress={() => {update()}}>
+          <Text>UPDATE</Text>
         </Button>
         <ScrollView>
-            {comments.map((comment, index) => {
+          {comments.map((comment, index) => {
             return(
               <View key={comment.index} style={styles.comment}>
                 <EvilIcons style={styles.userPicture} name="user" size={40} color="black" />
@@ -64,7 +44,6 @@ export default function Comments({ navigation }) {
                     <Text style={styles.username}>@{comment.username}</Text>
                   </View>
                 </View>
-
               </View>
             )
           })}
@@ -76,11 +55,7 @@ export default function Comments({ navigation }) {
             onChangeText={text => setText(text)}
             value={text}
           />
-          <TouchableOpacity style={styles.sendButton} onPress={() => {
-              let commentList = sendComment(url, text, comments);
-              setComments(commentList);
-              setText('');
-            }}>
+          <TouchableOpacity style={styles.sendButton} onPress={() => send()}>
             <Ionicons name="md-send" size={24} color="black" />
           </TouchableOpacity>
 
