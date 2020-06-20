@@ -12,3 +12,10 @@ web-report/
 
 # macOS
 .DS_Store
+
+# env file
+.env
+
+# lock files
+yarn.lock
+package-lock.json
