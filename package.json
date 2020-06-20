@@ -12,6 +12,7 @@
     "axios": "^0.19.2",
     "expo": "~37.0.3",
     "expo-font": "~8.1.0",
+    "firebase": "7.9.0",
     "native-base": "^2.13.12",
     "react": "~16.9.0",
     "react-dom": "~16.9.0",
@@ -23,7 +24,8 @@
     "react-native-vector-icons": "^6.6.0",
     "react-native-web": "~0.11.7",
     "react-navigation": "^4.3.9",
-    "react-navigation-stack": "^2.7.0"
+    "react-navigation-stack": "^2.7.0",
+    "unidecode": "^0.1.8"
   },
   "devDependencies": {
     "@babel/core": "^7.8.6",

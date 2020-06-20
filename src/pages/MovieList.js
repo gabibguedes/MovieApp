@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {ScrollView, Text} from 'react-native';
-import {Container, Header, Title, Spinner, List, ListItem} from 'native-base';
-import { Font } from 'expo';
+import {Container, Spinner, List, ListItem} from 'native-base';
 
 import axios from 'axios';
 
@@ -34,7 +33,7 @@ export default function MovieList({ navigation : { navigate }}) {
           <List>
             {movieList.map((movie, index) => {
               return (
-                <ListItem key={index} button={true} onPress={() => {navigate('Coments', {movie})}
+                <ListItem key={index} button={true} onPress={() => { navigate('Comments', { movie })}
                 }>
                   <Text>{movie.title}</Text>
                 </ListItem>

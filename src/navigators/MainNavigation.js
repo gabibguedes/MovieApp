@@ -1,5 +1,5 @@
 import MovieList from '../pages/MovieList';
-import Coments from '../pages/Coments';
+import Comments from '../pages/Comments';
 import { createStackNavigator } from "react-navigation-stack";
 import { createAppContainer } from 'react-navigation';
 
@@ -10,8 +10,8 @@ const AppNavigator = createStackNavigator({
       title: 'Movie List',
     }
   },
-  Coments: {
-    screen: Coments,
+  Comments: {
+    screen: Comments,
     navigationOptions: ({ navigation }) => ({
       title: `${navigation.state.params.movie.title}`,
     })

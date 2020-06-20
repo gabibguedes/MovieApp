@@ -4,6 +4,10 @@ import MovieList from './src/pages/MovieList.js';
 import { AppLoading } from 'expo';
 import * as Font from 'expo-font';
 import { Ionicons } from '@expo/vector-icons';
+import { YellowBox } from 'react-native';
+import _ from 'lodash';
+import { firebaseConfig } from './src/utils/firebase';
+import firebase from 'firebase';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -20,6 +24,16 @@ export default class App extends React.Component {
       ...Ionicons.font,
     });
     this.setState({ isReady: true });
+    if (!firebase.apps.length) {
+      firebase.initializeApp(firebaseConfig)
+    }
+    YellowBox.ignoreWarnings(['Setting a timer']);
+    const _console = _.clone(console);
+    console.warn = message => {
+      if (message.indexOf('Setting a timer') <= -1) {
+        _console.warn(message);
+      }
+    };
   }
 
   render() {
