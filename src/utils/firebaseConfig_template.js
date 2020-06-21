@@ -1,4 +1,4 @@
-// Rename this file to firebaseConfig.js and add you firebase variables
+// Rename this file to firebaseConfig.js and add your firebase variables
 
 export default firebaseConfig = {
     apiKey: "XXXXXXXX",

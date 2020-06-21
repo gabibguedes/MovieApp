@@ -1,37 +1,19 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import {ScrollView, Text} from 'react-native';
 import {Container, Spinner, List, ListItem} from 'native-base';
-
-import axios from 'axios';
+import { useMoviesJSON } from '../utils/movieRequests';
 
 export default function MovieList({ navigation : { navigate }}) {
-  const [movieList, setMovieList] = useState([]);
-  const [isLoading, setLoading] = useState(true);
-
-  useEffect(() => {
-    let isCancelled = false;
-    const moviesJson =
-      'https://tender-mclean-00a2bd.netlify.app/mobile/movies.json';
-
-    axios.get(moviesJson).then((res) => {
-      if(!isCancelled){
-        setMovieList(res.data);
-        setLoading(false);
-      }
-    });
-    return () => {
-      isCancelled = true;
-    }
-  });
+  const movies = useMoviesJSON();
 
   return (
     <Container>
       <ScrollView>
-        {isLoading ? (
+        {movies.loading ? (
           <Spinner />
         ) : (
           <List>
-            {movieList.map((movie, index) => {
+            {movies.list.map((movie, index) => {
               return (
                 <ListItem key={index} button={true} onPress={() => { navigate('Comments', { movie })}
                 }>

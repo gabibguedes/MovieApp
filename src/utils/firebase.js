@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import firebase from 'firebase';
 import firebaseConfig from './firebaseConfig';
 import unidecode from 'unidecode';
@@ -12,32 +13,39 @@ function init(){
   }
 }
 
-export function getComments(movieName) {
+export function sendComment(comment, movieName) {
   init();
   const url = nameToURL(movieName)
-  let comments = []
-
-  firebase.database().ref(url).on("value", function (snapshot) {
-    if (snapshot.val() !== null) {
-      comments = snapshot.val()
-    } else {
-      comments = []
-    }
-  }, function (err) {
-    console.log(err);
-  });
-  return comments;
-}
-
-export function sendComment(comment, movieName) {
-  const url = nameToURL(movieName)
-
-  let comementList = [...getComments(movieName), {
+  const newComment = {
     username: 'anonymous',
     text: comment
-  }]
+  }
+  firebase.database().ref(url).push(newComment)
+}
 
-  firebase.database().ref(url).set(comementList)
+export function useFirebaseComments(title){
+  const [comments, setComments] = useState([])
+  const [isLoading, setLoading] = useState(true);
+  const url = nameToURL(title);
+  init();
 
-  return comementList
+  useEffect(() => {
+    const ref = firebase.database().ref(url);
+    const listener = ref.on('value', snapshot => {
+      const fetchedTasks = [];
+      snapshot.forEach(childSnapshot => {
+        const key = childSnapshot.key;
+        const data = childSnapshot.val();
+        fetchedTasks.push({ id: key, ...data });
+      });
+      setComments(fetchedTasks);
+      setLoading(false);
+    });
+    return () => ref.off('value', listener);
+  }, []);
+
+  return {
+    list: comments,
+    loading: isLoading
+  }
 }

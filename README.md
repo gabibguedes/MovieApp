@@ -6,7 +6,7 @@ This project is an app made with React Native to show a list of movies from [mov
 
 Before running the project it's necessary to set up a firebase connection. 
 
-[Create a firebase project](https://firebase.google.com/), and add it's configuration on `src/utils/firebaseConfig.js`. Use the template file [firebaseConfig_example.js](./src/utils/firebaseConfig_example.js).
+[Create a firebase project](https://firebase.google.com/), and add it's configuration on `src/utils/firebaseConfig.js`. Use the template file [firebaseConfig_template.js](./src/utils/firebaseConfig_template.js).
 
 
 ## Run the app with Docker
