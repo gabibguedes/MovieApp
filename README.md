@@ -1,6 +1,6 @@
 # Turtle Trial - Movie App
 
-This project is an app made with React Native to show a list of movies from [movies.js](https://tender-mclean-00a2bd.netlify.app/mobile/movies.json) and the it's comments.
+This project is an app made with React Native to show a list of movies and it's comments.
 
 ## Set up Firebase
 
@@ -8,6 +8,14 @@ Before running the project it's necessary to set up a firebase connection.
 
 [Create a firebase project](https://firebase.google.com/), and add it's configuration on `src/utils/firebaseConfig.js`. Use the template file [firebaseConfig_template.js](./src/utils/firebaseConfig_template.js).
 
+Make sure your Firebase Realtime Database have read and write permissions. Change the rules of your database to the following:
+```
+  "rules": {
+    ".read": true,
+    ".write": true
+  }
+}
+```
 
 ## Run the app with Docker
 Create a file named `.env` in the project root, with the following line:
@@ -16,7 +24,7 @@ Create a file named `.env` in the project root, with the following line:
 REACT_NATIVE_PACKAGER_HOSTNAME=[Your IP address]
 ```
 
-Change from `[Your IP address]` to your computer's IP address. See the exaple on [.env_template](./.env_template).
+Change from `[Your IP address]` to your computer's IP address. See the example on [.env_template](./.env_template).
 
 Inside the project folder use the following command to run the app on a docker container:
 
@@ -55,9 +63,21 @@ Make sure your computer and phone are in the same network.
 
 ## Architecture
 
-The app was made in React Native, using Expo. It connects to firebase for the comments.
+![architecture](./img/architecture.png)
+The app was made with React Native framework, using Expo. It contains two pages, Movie List and Comments.
 
+The Movie List uses axios to get the movies json from the endpoint `https://tender-mclean-00a2bd.netlify.app/mobile/movies.json`.
+
+For the Comments, there is a firebase app that associate a list of comments with each movie from movie.json. The Comments page connects with the firebase database to show the movie comments and add new ones.
+
+The source code was divided into three folders, pages, wich contains the app pages (Movie List and Comments), navigators, contains the app navigation system to move between those pages, and utils, wich have the movie.json request, firebase connection and configuration.
+
+The choice for using Expo instead of React Native CLI was made for the easier to set environment and it covers all the app's needs in this case.
 
 ## What to improove
 
-- Add login
+The app is still missing a login system. The app currently only accepts anonymous comments. With a login system it would be possible to associate a comment to the logged user.
+
+## Working example
+
+![gif](./img/MovieApp.gif)
