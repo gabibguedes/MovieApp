@@ -33,7 +33,7 @@ Inside the project folder use the following command to run the app on a docker c
 docker-compose up
 ```
 
-## Run the app without Docker:
+## Run the app without Docker
 
 Make sure you have expo installed:
 
@@ -81,6 +81,7 @@ The choice for using Expo instead of React Native CLI was made for the easier to
 The app is still missing a login system. The app currently only accepts anonymous comments. With a login system it would be possible to associate a comment to the logged user.
 
 ## Working example
+
 <div style="text-align:center">
-<img src="./img/MovieApp.gif" />
+  <img src="./img/MovieApp.gif" />
 </div>
