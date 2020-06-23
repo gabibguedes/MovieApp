@@ -1,5 +1,6 @@
 # Turtle Trial - Movie App
 
+
 This project is an app made with React Native to show a list of movies and it's comments.
 
 ## Set up Firebase
@@ -32,7 +33,7 @@ Inside the project folder use the following command to run the app on a docker c
 docker-compose up
 ```
 
-## Run the app without docker:
+## Run the app without Docker:
 
 Make sure you have expo installed:
 
@@ -64,6 +65,7 @@ Make sure your computer and phone are in the same network.
 ## Architecture
 
 ![architecture](./img/architecture.png)
+
 The app was made with React Native framework, using Expo. It contains two pages, Movie List and Comments.
 
 The Movie List uses axios to get the movies json from the endpoint `https://tender-mclean-00a2bd.netlify.app/mobile/movies.json`.
@@ -74,10 +76,11 @@ The source code was divided into three folders, pages, wich contains the app pag
 
 The choice for using Expo instead of React Native CLI was made for the easier to set environment and it covers all the app's needs in this case.
 
-## What to improove
+## What to improve
 
 The app is still missing a login system. The app currently only accepts anonymous comments. With a login system it would be possible to associate a comment to the logged user.
 
 ## Working example
-
-![gif](./img/MovieApp.gif)
+<div style="text-align:center">
+<img src="./img/MovieApp.gif" />
+</div>
